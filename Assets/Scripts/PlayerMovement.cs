@@ -15,6 +15,8 @@ namespace TheDonnut.PlayerInteraction
         {
             if (Character == null)
                 Debug.LogWarning("No player set");
+            if (mainCamera == null)
+                Debug.LogWarning("No camera set");
             if (pivot == null)
                 Debug.LogWarning("No pivot set for camera movement");
             controls = new Controls();

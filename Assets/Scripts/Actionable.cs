@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TheDonnut.Actionable
+namespace TheDonnut.Actionables
 {
     public abstract class Actionable : MonoBehaviour
     {

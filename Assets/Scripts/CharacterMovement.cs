@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.AI;
+using TheDonnut.Actionables;
 
 namespace TheDonnut.PlayerInteraction
 {
@@ -21,6 +19,11 @@ namespace TheDonnut.PlayerInteraction
         public void SetDestination(Vector3 destination)
         {
             navMeshAgent.SetDestination(destination);
+        }
+
+        public void SetDestination(Actionable actionable)
+        {
+            navMeshAgent.SetDestination(actionable.transform.position);
         }
 
         private void Update()
