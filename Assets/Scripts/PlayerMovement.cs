@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.AI;
 
 namespace TheDonnut.PlayerInteraction
 {
     public class PlayerMovement : MonoBehaviour
     {
-        public Transform pivot;
-        public float sensitivity = 1f;
         Controls controls;
-        [SerializeField] CharacterMovement Character;
         [SerializeField] Camera mainCamera;
+        [SerializeField] Transform pivot;
+        [SerializeField] float sensitivity = 1f;
+        [SerializeField] CharacterMovement Character;
 
         private void Awake()
         {
@@ -21,7 +18,6 @@ namespace TheDonnut.PlayerInteraction
             if (pivot == null)
                 Debug.LogWarning("No pivot set for camera movement");
             controls = new Controls();
-            mainCamera = this.GetComponent<Camera>();
         }
 
         private void OnEnable()
@@ -36,8 +32,7 @@ namespace TheDonnut.PlayerInteraction
             Vector2 value = context.ReadValue<Vector2>();
             Debug.Log($"Move Input: {value}");
 
-
-            this.transform.RotateAround(pivot.position, Vector3.up, value.x * sensitivity);
+            mainCamera.transform.RotateAround(pivot.position, Vector3.up, value.x * sensitivity);
         }
 
 
