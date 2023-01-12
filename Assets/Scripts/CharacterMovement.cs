@@ -4,25 +4,28 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
 
-public class CharacterMovement : MonoBehaviour
+namespace TheDonnut.PlayerInteraction
 {
-    Controls controls;
-    NavMeshAgent navMeshAgent;
-    Animator animator;
-    private void Awake()
+    public class CharacterMovement : MonoBehaviour
     {
-        controls = new Controls();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-    }
+        Controls controls;
+        NavMeshAgent navMeshAgent;
+        Animator animator;
+        private void Awake()
+        {
+            controls = new Controls();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
+        }
 
-    public void SetDestination(Vector3 destination)
-    {
-        navMeshAgent.SetDestination(destination);
-    }
+        public void SetDestination(Vector3 destination)
+        {
+            navMeshAgent.SetDestination(destination);
+        }
 
-    private void Update()
-    {
-        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        private void Update()
+        {
+            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        }
     }
 }

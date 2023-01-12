@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Actionable
+namespace TheDonnut.Actionable
 {
     public abstract class Actionable : MonoBehaviour
     {
