@@ -1,11 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TheDonnut.Actionable
+namespace TheDonnut.Actionables
 {
-    public class Note : MonoBehaviour
+    public class Note : Actionable
     {
+        [SerializeField] string text = "";
 
+
+        public override void Actionate()
+        {
+            Debug.Log(text);
+        }
     }
 }

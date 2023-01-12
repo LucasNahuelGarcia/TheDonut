@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TheDonnut.Actionables;
 
 namespace TheDonnut.PlayerInteraction
 {
@@ -47,7 +48,13 @@ namespace TheDonnut.PlayerInteraction
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Character.SetDestination(hit.point);
+                GameObject objClicked = hit.transform.gameObject;
+                Actionable actionable = objClicked.GetComponent<Actionable>();
+
+                if (actionable == null)
+                    Character.SetDestination(hit.point);
+                else
+                    Character.SetDestinationAndActionate(actionable);
             }
         }
     }

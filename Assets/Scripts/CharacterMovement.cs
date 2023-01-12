@@ -9,6 +9,7 @@ namespace TheDonnut.PlayerInteraction
         Controls controls;
         NavMeshAgent navMeshAgent;
         Animator animator;
+        Actionable actionableTarget;
         private void Awake()
         {
             controls = new Controls();
@@ -21,14 +22,26 @@ namespace TheDonnut.PlayerInteraction
             navMeshAgent.SetDestination(destination);
         }
 
-        public void SetDestination(Actionable actionable)
+        public void SetDestinationAndActionate(Actionable actionable)
         {
             navMeshAgent.SetDestination(actionable.transform.position);
+            actionableTarget = actionable;
         }
 
         private void Update()
         {
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Actionable otherActionable = other.gameObject.GetComponent<Actionable>();
+            if ((actionableTarget != null) && (otherActionable == actionableTarget))
+            {
+                Debug.Log("Hitting a trigger");
+                actionableTarget.Actionate();
+                actionableTarget = null;
+            }
         }
     }
 }
