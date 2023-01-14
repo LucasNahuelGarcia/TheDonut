@@ -1,25 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TheDonnut.Actionables;
+using TheDonnut.Cameras;
 
 namespace TheDonnut.PlayerInteraction
 {
     public class PlayerMovement : MonoBehaviour
     {
         Controls controls;
-        [SerializeField] Camera mainCamera;
-        [SerializeField] Transform pivot;
         [SerializeField] float sensitivity = 1f;
         [SerializeField] CharacterMovement Character;
+        [SerializeField] CameraManager cameraManager;
 
         private void Awake()
         {
             if (Character == null)
                 Debug.LogWarning("No player set");
-            if (mainCamera == null)
-                Debug.LogWarning("No camera set");
-            if (pivot == null)
-                Debug.LogWarning("No pivot set for camera movement");
             controls = new Controls();
         }
 
@@ -35,7 +31,7 @@ namespace TheDonnut.PlayerInteraction
             Vector2 value = context.ReadValue<Vector2>();
             Debug.Log($"Move Input: {value}");
 
-            mainCamera.transform.RotateAround(pivot.position, Vector3.up, value.x * sensitivity);
+            cameraManager.CurrentActiveCamera.transform.RotateAround(cameraManager.CurrentPivot.position, Vector3.up, value.x * sensitivity);
         }
 
 
@@ -44,7 +40,7 @@ namespace TheDonnut.PlayerInteraction
             Vector2 mousePosition = Mouse.current.position.ReadValue();
 
             Debug.Log($"Clicked on: {mousePosition}");
-            Ray ray = mainCamera.ScreenPointToRay(mousePosition);
+            Ray ray = cameraManager.CurrentActiveCamera.ScreenPointToRay(mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {

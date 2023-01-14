@@ -19,6 +19,7 @@ namespace TheDonnut.PlayerInteraction
 
         public void SetDestination(Vector3 destination)
         {
+            Debug.DrawLine(destination, destination + Vector3.up, Color.green, 25f);
             navMeshAgent.SetDestination(destination);
         }
 
